@@ -10,7 +10,7 @@
     <!-- Load the properties file -->
     <context:property-placeholder location="classpath:application.properties"/>
 
-    <!-- Define your Beans here -->
+    <!-- Define your Beans here (BEFORE ANNOTATIONS)
     <bean id="myPizzeriaService1"
           class="com.agency04.sbss.pizza.MaslinaPizzeria">
         <property name="name" value="Maslina"/>
@@ -28,5 +28,8 @@
         <constructor-arg ref="myPizzeriaService1"/>
         <property name="pizzeriaService2" ref="myPizzeriaService2"/>
     </bean>
+    -->
+
+    <context:component-scan base-package="com.agency04.sbss.pizza" />
 
 </beans>

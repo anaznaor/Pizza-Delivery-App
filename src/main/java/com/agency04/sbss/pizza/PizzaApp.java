@@ -7,7 +7,7 @@ public class PizzaApp {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-context.xml");
 
-        PizzaDeliveryService delivery = ctx.getBean("pizzaDelivery", PizzaDeliveryService.class);
+        PizzaDeliveryService delivery = ctx.getBean("pizzaDeliveryService", PizzaDeliveryService.class);
 
         delivery.orderPizza(new Pizza[]{new Margherita(), new Vegetariana(), new Capricciosa()});
 

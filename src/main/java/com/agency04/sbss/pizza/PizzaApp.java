@@ -9,7 +9,11 @@ public class PizzaApp {
 
         PizzaDeliveryService delivery = ctx.getBean("pizzaDeliveryService", PizzaDeliveryService.class);
 
-        delivery.orderPizza(new Pizza[]{new Margherita(), new Vegetariana(), new Capricciosa()});
+        delivery.orderPizza(new Margherita());
+        System.out.println(delivery.getKarijolaPizzeria().makePizza(new Margherita()));
+
+        delivery.orderPizza(new QuattroFormaggi());
+        System.out.println(delivery.getMaslinaPizzeria().makePizza(new QuattroFormaggi()));
 
         ctx.close();
     }

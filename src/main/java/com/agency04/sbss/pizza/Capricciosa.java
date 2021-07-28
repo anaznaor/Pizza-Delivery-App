@@ -11,10 +11,7 @@ public class Capricciosa implements Pizza{
     }
 
     @Override
-    public String getIngredients() {
-        StringBuilder sb = new StringBuilder();
-        for(var ingredient: ingredients)
-            sb.append(ingredient.toString() + " ");
-        return sb.toString();
+    public PizzaIngredient[] getIngredients() {
+       return ingredients;
     }
 }

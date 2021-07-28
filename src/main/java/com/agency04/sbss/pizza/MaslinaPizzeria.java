@@ -5,21 +5,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MaslinaPizzeria implements PizzeriaService {
-    private Pizza pizza;
     @Value("Maslina")
     private String name;
     @Value("Stupnicka ul. 14, 10000 Zagreb")
     private String address;
-
-    /*
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    */
 
     @Override
     public String getName() {
@@ -33,8 +22,12 @@ public class MaslinaPizzeria implements PizzeriaService {
 
     @Override
     public String makePizza(Pizza pizza) {
-        this.pizza = pizza;
-        return "--> Pizzeria " + getName() + " is preparing " + pizza.getName() + ", required ingredients: " + pizza.getIngredients();
+        PizzaIngredient[] ingredients = pizza.getIngredients();
+        StringBuilder sb = new StringBuilder();
+        sb.append("--> Pizzeria " + getName() + " started preparing " + pizza.getName() + ", required ingredients: ");
+        for(var i: ingredients)
+            sb.append(i + " ");
+        return sb.toString();
     }
 
 }

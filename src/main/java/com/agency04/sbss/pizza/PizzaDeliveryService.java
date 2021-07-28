@@ -8,34 +8,20 @@ import org.springframework.stereotype.Component;
 public class PizzaDeliveryService {
     @Autowired
     @Qualifier("maslinaPizzeria")
-    private PizzeriaService pizzeriaService1;
+    private PizzeriaService maslinaPizzeria;
     @Autowired
     @Qualifier("karijolaPizzeria")
-    private PizzeriaService pizzeriaService2;
+    private PizzeriaService karijolaPizzeria;
 
-    /*
-    public PizzaDeliveryService(PizzeriaService pizzeriaService) {
-		this.pizzeriaService1 = pizzeriaService;
-	}
-    */
-
-    public void orderPizza(Pizza... pizzas) {
-        int  i = 1;
-        StringBuilder sb = new StringBuilder();
-        System.out.println("Order:");
-        for(var pizza : pizzas) {
-            System.out.println("1 " + pizza.getName());
-            if(i > 0)
-                System.out.println(pizzeriaService1.makePizza(pizza));
-            else
-                System.out.println(pizzeriaService2.makePizza(pizza));
-            i *= -1;
-        }
+    public void orderPizza(Pizza pizza) {
+        System.out.println("Order: " + pizza.getName());
     }
 
-    /*
-    public void setPizzeriaService2(PizzeriaService pizzeriaService) {
-        this.pizzeriaService2 = pizzeriaService;
+    public PizzeriaService getMaslinaPizzeria() {
+        return maslinaPizzeria;
     }
-    */
+
+    public PizzeriaService getKarijolaPizzeria() {
+        return karijolaPizzeria;
+    }
 }

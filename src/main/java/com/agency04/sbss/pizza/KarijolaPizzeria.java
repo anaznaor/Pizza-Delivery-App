@@ -1,14 +1,26 @@
 package com.agency04.sbss.pizza;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 @Component
+@Scope("prototype")
 public class KarijolaPizzeria implements PizzeriaService {
     @Value("${pizzeria.name}")
     private String name;
     @Value("${pizzeria.address}")
     private String address;
+    private boolean open;
+
+    @PostConstruct
+    public void doMyPostConstruct(){
+        System.out.println("Inside of KarijolaPizzeria's doMyPostConstruct.");
+        open = true;
+    }
 
     @Override
     public String getName() {
@@ -28,5 +40,10 @@ public class KarijolaPizzeria implements PizzeriaService {
         for(var i: ingredients)
             sb.append(i + " ");
         return sb.toString();
+    }
+
+    @PreDestroy
+    public void doMyPreDestroy(){
+        System.out.println("Inside of KarijolaPizzeria's doMyPreDestroy");
     }
 }

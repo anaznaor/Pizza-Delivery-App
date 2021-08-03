@@ -1,21 +1,14 @@
 package com.agency04.sbss.pizza;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-@Component
-@Scope("prototype")
+@Service
 public class PizzaDeliveryService {
     @Autowired
-    @Qualifier("maslinaPizzeria")
-    private PizzeriaService maslinaPizzeria;
-    @Autowired
-    @Qualifier("karijolaPizzeria")
     private PizzeriaService karijolaPizzeria;
     private boolean available;
 
@@ -26,10 +19,6 @@ public class PizzaDeliveryService {
     }
     public void orderPizza(Pizza pizza) {
         System.out.println("Order: " + pizza.getName());
-    }
-
-    public PizzeriaService getMaslinaPizzeria() {
-        return maslinaPizzeria;
     }
 
     public PizzeriaService getKarijolaPizzeria() {

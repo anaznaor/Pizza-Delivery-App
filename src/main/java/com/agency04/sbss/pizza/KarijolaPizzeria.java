@@ -8,7 +8,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 @Component
-@Scope("prototype")
 public class KarijolaPizzeria implements PizzeriaService {
     @Value("${pizzeria.name}")
     private String name;

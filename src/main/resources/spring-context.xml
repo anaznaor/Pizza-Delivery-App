@@ -10,26 +10,6 @@
     <!-- Load the properties file -->
     <context:property-placeholder location="classpath:application.properties"/>
 
-    <!-- Define your Beans here (BEFORE ANNOTATIONS)
-    <bean id="myPizzeriaService1"
-          class="com.agency04.sbss.pizza.MaslinaPizzeria">
-        <property name="name" value="Maslina"/>
-        <property name="address" value="Stupnicka ul. 14, 10000 Zagreb"/>
-    </bean>
-
-    <bean id="myPizzeriaService2"
-          class="com.agency04.sbss.pizza.KarijolaPizzeria">
-        <property name="name" value="${pizzeria.name}"/>
-        <property name="address" value="${pizzeria.address}"/>
-    </bean>
-
-    <bean id="pizzaDelivery"
-          class="com.agency04.sbss.pizza.PizzaDeliveryService">
-        <constructor-arg ref="myPizzeriaService1"/>
-        <property name="pizzeriaService2" ref="myPizzeriaService2"/>
-    </bean>
-    -->
-
     <context:component-scan base-package="com.agency04.sbss.pizza" />
 
 </beans>

@@ -1,13 +1,11 @@
 package com.agency04.sbss.pizza;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-@Component
 public class KarijolaPizzeria implements PizzeriaService {
     @Value("${pizzeria.name}")
     private String name;

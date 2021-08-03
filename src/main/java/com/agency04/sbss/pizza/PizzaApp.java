@@ -1,19 +1,13 @@
 package com.agency04.sbss.pizza;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class PizzaApp {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(PizzaConfig.class);
-
-        PizzaDeliveryService delivery = ctx.getBean("pizzaDeliveryService", PizzaDeliveryService.class);
-
-        delivery.orderPizza(new QuattroFormaggi());
-        System.out.println(delivery.getKarijolaPizzeria().makePizza(new QuattroFormaggi()));
-
-        ctx.close();
+        SpringApplication.run(PizzaApp.class, args);
     }
 
 }

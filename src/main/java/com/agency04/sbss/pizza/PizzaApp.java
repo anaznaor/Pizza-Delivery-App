@@ -1,7 +1,7 @@
 package com.agency04.sbss.pizza;
 
 import com.agency04.sbss.pizza.model.QuattroFormaggi;
-import com.agency04.sbss.pizza.service.impl.PizzaDeliveryService;
+import com.agency04.sbss.pizza.service.PizzaDeliveryService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;

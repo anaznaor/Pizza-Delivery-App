@@ -1,7 +1,7 @@
-package com.agency04.sbss.pizza.service.config;
+package com.agency04.sbss.pizza.config;
 
 import com.agency04.sbss.pizza.service.impl.KarijolaPizzeria;
-import com.agency04.sbss.pizza.service.impl.PizzeriaService;
+import com.agency04.sbss.pizza.service.PizzeriaService;
 import org.springframework.context.annotation.*;
 
 @Configuration

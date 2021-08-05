@@ -1,6 +1,6 @@
-package com.agency04.sbss.pizza.service.rest;
+package com.agency04.sbss.pizza.rest;
 
-import com.agency04.sbss.pizza.service.impl.PizzaDeliveryService;
+import com.agency04.sbss.pizza.service.PizzaDeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

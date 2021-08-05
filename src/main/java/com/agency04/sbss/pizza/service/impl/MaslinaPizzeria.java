@@ -1,21 +1,24 @@
-package com.agency04.sbss.pizza;
+package com.agency04.sbss.pizza.service.impl;
 
+import com.agency04.sbss.pizza.model.Pizza;
+import com.agency04.sbss.pizza.model.PizzaIngredient;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-public class KarijolaPizzeria implements PizzeriaService {
-    @Value("${pizzeria.name}")
+@Service
+public class MaslinaPizzeria implements PizzeriaService {
+    @Value("Maslina")
     private String name;
-    @Value("${pizzeria.address}")
+    @Value("Stupnicka ul. 14, 10000 Zagreb")
     private String address;
     private boolean open;
 
     @PostConstruct
     public void doMyPostConstruct(){
-        System.out.println("Inside of KarijolaPizzeria's doMyPostConstruct.");
+        System.out.println("Inside of MaslinaPizzeria's doMyPostConstruct.");
         open = true;
     }
 
@@ -41,6 +44,6 @@ public class KarijolaPizzeria implements PizzeriaService {
 
     @PreDestroy
     public void doMyPreDestroy(){
-        System.out.println("Inside of KarijolaPizzeria's doMyPreDestroy");
+        System.out.println("Inside of MaslinaPizzeria's doMyPreDestroy");
     }
 }

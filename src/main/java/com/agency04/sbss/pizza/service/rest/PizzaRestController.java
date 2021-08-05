@@ -1,5 +1,6 @@
-package com.agency04.sbss.pizza;
+package com.agency04.sbss.pizza.service.rest;
 
+import com.agency04.sbss.pizza.service.impl.PizzaDeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PizzaRestController {
     @Autowired
-    private PizzeriaService karijolaPizzeria;
+    private PizzaDeliveryService pizzaDeliveryService;
 
     @GetMapping("/")
     public String sayHello() {
@@ -16,6 +17,6 @@ public class PizzaRestController {
 
     @GetMapping("/pizzerias")
     public String getPizzerias(){
-        return "Available pizzeria: " + karijolaPizzeria.getName();
+        return "Available pizzeria: " + pizzaDeliveryService.getPizzeriaService().getName();
     }
 }

@@ -1,4 +1,4 @@
-package com.agency04.sbss.pizza;
+package com.agency04.sbss.pizza.model;
 
 public class FruttiDiMare implements Pizza {
     private PizzaIngredient[] ingredients =

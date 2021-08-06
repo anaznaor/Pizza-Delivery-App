@@ -1,21 +1,18 @@
 package com.agency04.sbss.pizza;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.agency04.sbss.pizza.model.QuattroFormaggi;
+import com.agency04.sbss.pizza.service.PizzaDeliveryService;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
+@SpringBootApplication
 public class PizzaApp {
 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-context.xml");
-
-        PizzaDeliveryService delivery = ctx.getBean("pizzaDeliveryService", PizzaDeliveryService.class);
-
-        delivery.orderPizza(new Margherita());
-        System.out.println(delivery.getKarijolaPizzeria().makePizza(new Margherita()));
-
-        delivery.orderPizza(new QuattroFormaggi());
-        System.out.println(delivery.getMaslinaPizzeria().makePizza(new QuattroFormaggi()));
-
-        ctx.close();
+       ApplicationContext context = SpringApplication.run(PizzaApp.class, args);
+       PizzaDeliveryService delivery = context.getBean(PizzaDeliveryService.class);
+       delivery.orderPizza(new QuattroFormaggi());
     }
 
 }

@@ -1,4 +1,4 @@
-package com.agency04.sbss.pizza;
+package com.agency04.sbss.pizza.model;
 
 public enum PizzaIngredient {
     FRENCH_FRIES, MOZZARELLA, SAUSAGE, TOMATO_SAUCE, HAM, ARTICHOKES, MUSHROOMS,

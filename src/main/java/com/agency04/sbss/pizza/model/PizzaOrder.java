@@ -2,13 +2,13 @@ package com.agency04.sbss.pizza.model;
 
 public class PizzaOrder {
     private String pizza;
-    private String size;
+    private PizzaSize size;
     private int quantity;
 
     public PizzaOrder() {
     }
 
-    public PizzaOrder(String pizza, String size, int quantity) {
+    public PizzaOrder(String pizza, PizzaSize size, int quantity) {
         this.pizza = pizza;
         this.size = size;
         this.quantity = quantity;
@@ -22,11 +22,11 @@ public class PizzaOrder {
         this.pizza = pizza;
     }
 
-    public String getSize() {
+    public PizzaSize getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(PizzaSize size) {
         this.size = size;
     }
 

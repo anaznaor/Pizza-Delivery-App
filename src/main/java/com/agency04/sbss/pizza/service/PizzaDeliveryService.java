@@ -29,9 +29,9 @@ public class PizzaDeliveryService {
 
         DeliveryOrderForm firstDeliveryOrder = new DeliveryOrderForm();
         firstDeliveryOrder.setCustomer(customers.get(2).getUserName());
-        firstDeliveryOrder.setOrders(new PizzaOrder("Margharita", "SMALL", 2));
-        firstDeliveryOrder.setOrders(new PizzaOrder("Capriciosa", "LARGE", 1),
-                new PizzaOrder("Vegetariana", "MEDIUM", 3));
+        firstDeliveryOrder.setOrders(new PizzaOrder("Margharita", PizzaSize.SMALL, 2));
+        firstDeliveryOrder.setOrders(new PizzaOrder("Capriciosa", PizzaSize.LARGE, 1),
+                new PizzaOrder("Vegetariana", PizzaSize.MEDIUM, 3));
         orders.add(firstDeliveryOrder);
     }
     public void orderPizza(Pizza pizza) {

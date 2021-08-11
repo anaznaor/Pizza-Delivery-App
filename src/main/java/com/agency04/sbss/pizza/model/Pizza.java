@@ -4,4 +4,6 @@ public interface Pizza {
     public String getName();
 
     public PizzaIngredient[] getIngredients();
+
+    public PizzaSize[] getSizes();
 }

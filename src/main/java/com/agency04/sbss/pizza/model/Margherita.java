@@ -1,7 +1,5 @@
 package com.agency04.sbss.pizza.model;
 
-import java.util.Arrays;
-
 public class Margherita implements Pizza {
     private String name = "Margherita";
 

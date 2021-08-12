@@ -1,4 +1,4 @@
-package com.agency04.sbss.pizza.rest;
+package com.agency04.sbss.pizza.exception;
 
 public class CustomerNotFoundException extends RuntimeException{
     public CustomerNotFoundException(String message) {

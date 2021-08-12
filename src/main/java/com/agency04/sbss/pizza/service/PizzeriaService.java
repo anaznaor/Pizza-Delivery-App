@@ -5,11 +5,11 @@ import com.agency04.sbss.pizza.model.Pizza;
 import java.util.List;
 
 public interface PizzeriaService {
-    public String getName();
+    String getName();
 
-    public String getAddress();
+    String getAddress();
 
-    public String makePizza(Pizza pizza);
+    String makePizza(Pizza pizza);
 
-    public List<Pizza> getMenu();
+    List<Pizza> getMenu();
 }

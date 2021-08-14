@@ -1,12 +1,13 @@
 package com.agency04.sbss.pizza.service.impl;
 
-import com.agency04.sbss.pizza.model.Pizza;
-import com.agency04.sbss.pizza.model.PizzaIngredient;
+import com.agency04.sbss.pizza.model.*;
 import com.agency04.sbss.pizza.service.PizzeriaService;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.ArrayList;
+import java.util.List;
 
 public class KarijolaPizzeria implements PizzeriaService {
     @Value("${pizzeria.name}")
@@ -14,11 +15,18 @@ public class KarijolaPizzeria implements PizzeriaService {
     @Value("${pizzeria.address}")
     private String address;
     private boolean open;
+    private List<Pizza> menu;
 
     @PostConstruct
     public void doMyPostConstruct(){
         System.out.println("Inside of KarijolaPizzeria's doMyPostConstruct.");
         open = true;
+
+        menu = new ArrayList<>();
+        menu.add(new FruttiDiMare());
+        menu.add(new Margherita());
+        menu.add(new Prosciutto());
+        menu.add(new Tonno());
     }
 
     @Override
@@ -39,6 +47,11 @@ public class KarijolaPizzeria implements PizzeriaService {
         for(var i: ingredients)
             sb.append(i + " ");
         return sb.toString();
+    }
+
+    @Override
+    public List<Pizza> getMenu() {
+        return menu;
     }
 
     @PreDestroy

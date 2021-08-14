@@ -1,13 +1,14 @@
 package com.agency04.sbss.pizza.service.impl;
 
-import com.agency04.sbss.pizza.model.Pizza;
-import com.agency04.sbss.pizza.model.PizzaIngredient;
+import com.agency04.sbss.pizza.model.*;
 import com.agency04.sbss.pizza.service.PizzeriaService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class MaslinaPizzeria implements PizzeriaService {
@@ -16,11 +17,18 @@ public class MaslinaPizzeria implements PizzeriaService {
     @Value("Stupnicka ul. 14, 10000 Zagreb")
     private String address;
     private boolean open;
+    private List<Pizza> menu;
 
     @PostConstruct
     public void doMyPostConstruct(){
         System.out.println("Inside of MaslinaPizzeria's doMyPostConstruct.");
         open = true;
+
+        menu = new ArrayList<>();
+        menu.add(new Capricciosa());
+        menu.add(new QuattroFormaggi());
+        menu.add(new Vegetariana());
+        menu.add(new Americana());
     }
 
     @Override
@@ -41,6 +49,11 @@ public class MaslinaPizzeria implements PizzeriaService {
         for(var i: ingredients)
             sb.append(i + " ");
         return sb.toString();
+    }
+
+    @Override
+    public List<Pizza> getMenu() {
+        return menu;
     }
 
     @PreDestroy

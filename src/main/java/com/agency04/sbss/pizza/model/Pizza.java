@@ -1,7 +1,9 @@
 package com.agency04.sbss.pizza.model;
 
 public interface Pizza {
-    public String getName();
+    String getName();
 
-    public PizzaIngredient[] getIngredients();
+    PizzaIngredient[] getIngredients();
+
+    PizzaSize[] getSizes();
 }

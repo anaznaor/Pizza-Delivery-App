@@ -13,8 +13,6 @@ import java.util.List;
 public class PizzeriaController {
     @Autowired
     private PizzeriaService pizzeriaService;
-    @Autowired
-    ConversionService conversionService;
 
     @GetMapping("/")
     public PizzeriaService getPizzerias(){

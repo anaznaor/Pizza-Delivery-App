@@ -19,8 +19,6 @@ public class DeliveryController {
     private PizzaDeliveryService pizzaDeliveryService;
     @Autowired
     private CustomerService customerService;
-    @Autowired
-    ConversionService conversionService;
 
     @PostMapping(value = "/order", produces = "application/json")
     public ResponseEntity postOrder(@RequestBody DeliveryOrderForm newOrder){

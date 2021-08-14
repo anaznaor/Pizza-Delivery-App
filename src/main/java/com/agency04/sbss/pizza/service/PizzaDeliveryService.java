@@ -12,8 +12,6 @@ public class PizzaDeliveryService {
     @Autowired
     private PizzeriaService pizzeriaService;
     private boolean available;
-    @Autowired
-    private CustomerService customerService;
     private List<PizzaOrder> pizzaOrders = new ArrayList<>();
 
     @PostConstruct

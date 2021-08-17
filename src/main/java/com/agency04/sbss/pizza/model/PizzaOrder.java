@@ -1,24 +1,47 @@
 package com.agency04.sbss.pizza.model;
 
+import javax.persistence.*;
+
+@Entity
 public class PizzaOrder {
-    private String pizza;
+    @Id
+    @GeneratedValue
+    private long id;
+    @ManyToOne
+    @JoinColumn(name = "pizza_id")
+    private Pizza pizza;
+    private String pizzaName;
     private PizzaSize size;
     private int quantity;
+    @ManyToOne
+    @JoinColumn(name = "delivery_id")
+    private Delivery delivery;
 
     public PizzaOrder() {
     }
 
-    public PizzaOrder(String pizza, PizzaSize size, int quantity) {
-        this.pizza = pizza;
+    public PizzaOrder(String pizzaName, PizzaSize size, int quantity) {
+        this.pizzaName = pizzaName;
         this.size = size;
         this.quantity = quantity;
     }
 
-    public String getPizza() {
+    public long getId() {
+        return id;
+    }
+
+    public void setPizzaName(String pizzaName) {
+        this.pizzaName = pizzaName;
+    }
+
+    public String getPizzaName() {
+        return pizzaName;
+    }
+    public Pizza getPizza() {
         return pizza;
     }
 
-    public void setPizza(String pizza) {
+    public void setPizza(Pizza pizza) {
         this.pizza = pizza;
     }
 

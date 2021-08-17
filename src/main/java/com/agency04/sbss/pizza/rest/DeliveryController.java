@@ -6,7 +6,6 @@ import com.agency04.sbss.pizza.model.PizzaOrder;
 import com.agency04.sbss.pizza.service.CustomerService;
 import com.agency04.sbss.pizza.service.PizzaDeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +20,10 @@ public class DeliveryController {
     private CustomerService customerService;
 
     @PostMapping(value = "/order", produces = "application/json")
-    public ResponseEntity postOrder(@RequestBody DeliveryOrderForm newOrder){
+    public ResponseEntity postOrder(@RequestBody DeliveryOrderForm newOrder) throws Exception {
         if(customerService.getCustomer(newOrder.getCustomer()) != null){
+            if(!pizzaDeliveryService.saveNewDelivery(newOrder))
+                throw new Exception("Error in orders.");
             List<PizzaOrder> orders = newOrder.getOrders();
             for(var order : orders)
                 pizzaDeliveryService.getPizzaOrders().add(order);

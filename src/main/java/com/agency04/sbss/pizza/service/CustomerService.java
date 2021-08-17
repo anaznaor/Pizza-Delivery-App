@@ -1,60 +1,51 @@
 package com.agency04.sbss.pizza.service;
 
+import com.agency04.sbss.pizza.jpa.CustomerRepository;
 import com.agency04.sbss.pizza.model.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
-    private List<Customer> customers = new ArrayList<>();
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @PostConstruct
     public void doMyPostConstruct() {
         System.out.println("Inside of CustomerService's doMyPostConstruct.");
-
-        customers.add(new Customer("anaznaor", "Ana", "Znaor", 26, "Croatia", "Split", "Terzićeva 5"));
-        customers.add(new Customer("petricevicluka", "Luka", "Petričević", 25, "Croatia", "Split", "Antofagaste 2"));
-        customers.add(new Customer("lucijasrpak", "Lucija", "Srpak", 23, "Croatia", "Split", "Domovinskog rata 27"));
-        customers.add(new Customer("smodlakatina", "Tina", "Smodlaka", 22, "Croatia", "Solin", "Matoševa 6"));
-        customers.add(new Customer("szovko", "Sara", "Zovko", 25, "Croatia", "Zagreb", "Travanjska 12"));
     }
 
     public List<Customer> getCustomers() {
-        return customers;
+        return customerRepository.findAll();
     }
 
     public Customer getCustomer(String userName){
+        Optional<Customer> result = customerRepository.findById(userName);
         Customer customer = null;
-        for(Customer c : this.customers) {
-            if(c.getUserName().equals(userName))
-                customer = c;
+        if (result.isPresent()) {
+            customer = result.get();
         }
         return customer;
     }
 
     public boolean newCustomer(Customer newCustomer){
-        if(this.customers.contains(newCustomer))
+        if(customerRepository.findById(newCustomer.getUserName()).isPresent())
             return false;
-        this.customers.add(newCustomer);
+        customerRepository.save(newCustomer);
         return true;
     }
 
     public boolean updateCustomer(Customer customer){
-        if(this.customers.contains(customer)){
-            for(Customer c : this.customers) {
-                if (c.equals(customer)){
-                    c.setName(customer.getName());
-                    c.setLastName(customer.getLastName());
-                    c.setAge(customer.getAge());
-                    c.setCountry(customer.getCountry());
-                    c.setCity(customer.getCity());
-                    c.setAddress(customer.getAddress());
-                    break;
-                }
-            }
+        Customer theCustomer = getCustomer(customer.getUserName());
+        if(theCustomer != null){
+            theCustomer.getCustomerDetails().setFirstName(customer.getCustomerDetails().getFirstName());
+            theCustomer.getCustomerDetails().setLastName(customer.getCustomerDetails().getLastName());
+            theCustomer.getCustomerDetails().setPhone(customer.getCustomerDetails().getPhone());
             return true;
         }
         else
@@ -62,13 +53,12 @@ public class CustomerService {
     }
 
     public boolean deleteCustomer(String userName){
-        Iterator<Customer> it = this.customers.iterator();
-        while(it.hasNext()) {
-            if(it.next().getUserName().equals(userName)){
-                it.remove();
-                return true;
-            }
+        Customer theCustomer = getCustomer(userName);
+        if(theCustomer != null){
+            customerRepository.deleteById(userName);
+            return true;
         }
-        return false;
+        else
+            return false;
     }
 }

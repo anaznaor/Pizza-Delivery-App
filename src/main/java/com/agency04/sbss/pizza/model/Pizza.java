@@ -9,7 +9,13 @@ import java.util.Objects;
 public class Pizza {
     @Id
     private String name;
+
+    @ElementCollection(targetClass = PizzaIngredient.class)
+    @CollectionTable
+    @Enumerated(EnumType.STRING)
+    @OrderColumn(name="id")
     private PizzaIngredient[] pizzaIngredients;
+
     @OneToMany(mappedBy = "pizza")
     private List<PizzaOrder> pizzaOrders;
 

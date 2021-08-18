@@ -1,9 +1,9 @@
 package com.agency04.sbss.pizza.service;
 
 import com.agency04.sbss.pizza.form.DeliveryOrderForm;
-import com.agency04.sbss.pizza.jpa.DeliveryRepository;
-import com.agency04.sbss.pizza.jpa.PizzaOrderRepository;
-import com.agency04.sbss.pizza.jpa.PizzaRepository;
+import com.agency04.sbss.pizza.repository.DeliveryRepository;
+import com.agency04.sbss.pizza.repository.PizzaOrderRepository;
+import com.agency04.sbss.pizza.repository.PizzaRepository;
 import com.agency04.sbss.pizza.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

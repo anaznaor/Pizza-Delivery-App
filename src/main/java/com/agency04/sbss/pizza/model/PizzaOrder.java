@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class PizzaOrder {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @ManyToOne
     @JoinColumn(name = "pizza_id")

@@ -1,12 +1,10 @@
 package com.agency04.sbss.pizza.service;
 
-import com.agency04.sbss.pizza.jpa.CustomerRepository;
+import com.agency04.sbss.pizza.repository.CustomerRepository;
 import com.agency04.sbss.pizza.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,14 +32,14 @@ public class CustomerService {
     }
 
     public boolean newCustomer(Customer newCustomer){
-        if(customerRepository.findById(newCustomer.getUserName()).isPresent())
+        if(customerRepository.findById(newCustomer.getUsername()).isPresent())
             return false;
         customerRepository.save(newCustomer);
         return true;
     }
 
     public boolean updateCustomer(Customer customer){
-        Customer theCustomer = getCustomer(customer.getUserName());
+        Customer theCustomer = getCustomer(customer.getUsername());
         if(theCustomer != null){
             theCustomer.getCustomerDetails().setFirstName(customer.getCustomerDetails().getFirstName());
             theCustomer.getCustomerDetails().setLastName(customer.getCustomerDetails().getLastName());

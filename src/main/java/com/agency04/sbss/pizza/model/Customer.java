@@ -5,32 +5,32 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Customer {
     @Id
-    private String userName;
+    @Column(name = "username")
+    private String username;
 
-    @OneToOne(mappedBy = "customer")
-    @PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_details_id")
     private CustomerDetails customerDetails;
 
     @OneToMany(mappedBy = "customer")
     List<Delivery> deliveries;
 
-    public Customer(String userName, String firstName, String lastName, String phone) {
-        this.userName = userName;
-        this.customerDetails = new CustomerDetails(userName, firstName, lastName, phone);
+    public Customer(String username, CustomerDetails customerDetails) {
+        this.username = username;
+        this.customerDetails = customerDetails;
     }
 
     public Customer() {
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public CustomerDetails getCustomerDetails() {
@@ -54,11 +54,11 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return this.getUserName().equals(customer.getUserName());
+        return this.getUsername().equals(customer.getUsername());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName, customerDetails, deliveries);
+        return Objects.hash(username, customerDetails, deliveries);
     }
 }

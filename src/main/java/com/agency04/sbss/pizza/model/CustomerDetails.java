@@ -6,32 +6,28 @@ import java.util.Objects;
 @Entity
 public class CustomerDetails {
     @Id
-    @Column(name = "customer_userName")
-    private String userName;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
     private String firstName;
     private String lastName;
     private String phone;
-    @OneToOne(cascade = CascadeType.ALL)
-    @MapsId
-    @JoinColumn(name = "customer_userName")
-    private Customer customer;
 
     public CustomerDetails() {
     }
 
-    public CustomerDetails(String userName, String firstName, String lastName, String phone) {
-        this.userName = userName;
+    public CustomerDetails(String firstName, String lastName, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
     }
 
-    public String getUserName() {
-        return userName;
+    public long getId() {
+        return id;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setId(long username) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -58,24 +54,16 @@ public class CustomerDetails {
         this.phone = phone;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CustomerDetails that = (CustomerDetails) o;
-        return this.getUserName().equals(customer.getUserName());
+        return this.id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName, firstName, lastName, phone, customer);
+        return Objects.hash(id, firstName, lastName, phone);
     }
 }

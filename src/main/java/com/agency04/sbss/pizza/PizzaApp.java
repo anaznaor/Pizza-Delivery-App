@@ -1,6 +1,7 @@
 package com.agency04.sbss.pizza;
 
 import com.agency04.sbss.pizza.model.Customer;
+import com.agency04.sbss.pizza.model.CustomerDetails;
 import com.agency04.sbss.pizza.model.PizzaIngredient;
 import com.agency04.sbss.pizza.service.CustomerService;
 import com.agency04.sbss.pizza.service.PizzaDeliveryService;
@@ -28,10 +29,10 @@ public class PizzaApp implements CommandLineRunner {
         deliveryService.saveNewPizza("Vegetariana", new PizzaIngredient[]{PizzaIngredient.TOMATO_SAUCE, PizzaIngredient.MOZZARELLA, PizzaIngredient.VARIOUS_VEGETABLES});
 
         CustomerService customerService = context.getBean(CustomerService.class);
-        customerService.newCustomer(new Customer("anaznaor", "Ana", "Znaor", "0955700366"));
-        customerService.newCustomer(new Customer("petricevicluka", "Luka", "Petričević", "0989167600"));
-        customerService.newCustomer(new Customer("lucijasrpak", "Lucija", "Srpak", "0915786147"));
-        customerService.newCustomer(new Customer("smodlakatina", "Tina", "Smodlaka", "0996341515"));
-        customerService.newCustomer(new Customer("szovko", "Sara", "Zovko", "0986543214"));
+        customerService.newCustomer(new Customer("anaznaor", new CustomerDetails("Ana", "Znaor", "0955700366")));
+        customerService.newCustomer(new Customer("petricevicluka", new CustomerDetails("Luka", "Petričević", "0989167600")));
+        customerService.newCustomer(new Customer("lucijasrpak", new CustomerDetails("Lucija", "Srpak", "0915786147")));
+        customerService.newCustomer(new Customer("smodlakatina", new CustomerDetails("Tina", "Smodlaka", "0996341515")));
+        customerService.newCustomer(new Customer("szovko", new CustomerDetails("Sara", "Zovko", "0986543214")));
     }
 }

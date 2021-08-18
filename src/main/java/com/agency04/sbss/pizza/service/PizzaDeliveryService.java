@@ -54,9 +54,8 @@ public class PizzaDeliveryService {
 
     public boolean saveNewPizzaOrders(List<PizzaOrder> pizzaOrders){
         for(var order : pizzaOrders){
-            Pizza pizza = getPizza(order.getPizzaName());
+            Pizza pizza = getPizza(order.getPizza().getName());
             if(pizza != null) {
-                order.setPizza(pizza);
                 pizzaOrderRepository.save(order);
                 return true;
             }
@@ -64,8 +63,8 @@ public class PizzaDeliveryService {
         return false;
     }
 
-    public Pizza getPizza(String pizzaName){
-        Optional<Pizza> result = pizzaRepository.findById(pizzaName);
+    public Pizza getPizza(String name){
+        Optional<Pizza> result = pizzaRepository.findById(name);
         Pizza pizza = null;
         if (result.isPresent()) {
             pizza = result.get();

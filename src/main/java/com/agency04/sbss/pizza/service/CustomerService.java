@@ -1,5 +1,7 @@
 package com.agency04.sbss.pizza.service;
 
+import com.agency04.sbss.pizza.model.CustomerDetails;
+import com.agency04.sbss.pizza.repository.CustomerDetailsRepository;
 import com.agency04.sbss.pizza.repository.CustomerRepository;
 import com.agency04.sbss.pizza.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import java.util.Optional;
 public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerDetailsRepository customerDetailsRepository;
 
     @PostConstruct
     public void doMyPostConstruct() {
@@ -34,6 +38,10 @@ public class CustomerService {
     public boolean newCustomer(Customer newCustomer){
         if(customerRepository.findById(newCustomer.getUsername()).isPresent())
             return false;
+        CustomerDetails customerDetails = new CustomerDetails(newCustomer.getCustomerDetails().getFirstName(),
+                newCustomer.getCustomerDetails().getLastName(), newCustomer.getCustomerDetails().getPhone());
+        customerDetailsRepository.save(customerDetails);
+        newCustomer.setCustomerDetails(customerDetails);
         customerRepository.save(newCustomer);
         return true;
     }

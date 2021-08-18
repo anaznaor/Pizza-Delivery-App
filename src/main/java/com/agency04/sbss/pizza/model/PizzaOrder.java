@@ -10,7 +10,6 @@ public class PizzaOrder {
     @ManyToOne
     @JoinColumn(name = "pizza_id")
     private Pizza pizza;
-    private String pizzaName;
     private PizzaSize size;
     private int quantity;
     @ManyToOne
@@ -20,8 +19,8 @@ public class PizzaOrder {
     public PizzaOrder() {
     }
 
-    public PizzaOrder(String pizzaName, PizzaSize size, int quantity) {
-        this.pizzaName = pizzaName;
+    public PizzaOrder(Pizza pizza, PizzaSize size, int quantity) {
+        this.pizza = pizza;
         this.size = size;
         this.quantity = quantity;
     }
@@ -30,13 +29,6 @@ public class PizzaOrder {
         return id;
     }
 
-    public void setPizzaName(String pizzaName) {
-        this.pizzaName = pizzaName;
-    }
-
-    public String getPizzaName() {
-        return pizzaName;
-    }
     public Pizza getPizza() {
         return pizza;
     }

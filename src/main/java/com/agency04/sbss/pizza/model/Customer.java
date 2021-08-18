@@ -1,10 +1,13 @@
 package com.agency04.sbss.pizza.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@JsonIgnoreProperties(value = { "deliveries" })
 public class Customer {
     @Id
     @Column(name = "username")

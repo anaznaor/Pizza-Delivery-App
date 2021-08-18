@@ -1,7 +1,6 @@
 package com.agency04.sbss.pizza.service;
 
-import com.agency04.sbss.pizza.model.CustomerDetails;
-import com.agency04.sbss.pizza.repository.CustomerDetailsRepository;
+import com.agency04.sbss.pizza.form.CustomerForm;
 import com.agency04.sbss.pizza.repository.CustomerRepository;
 import com.agency04.sbss.pizza.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,6 @@ import java.util.Optional;
 public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
-    @Autowired
-    private CustomerDetailsRepository customerDetailsRepository;
 
     @PostConstruct
     public void doMyPostConstruct() {
@@ -35,23 +32,20 @@ public class CustomerService {
         return customer;
     }
 
-    public boolean newCustomer(Customer newCustomer){
-        if(customerRepository.findById(newCustomer.getUsername()).isPresent())
+    public boolean newCustomer(CustomerForm newCustomerForm){
+        if(customerRepository.findById(newCustomerForm.getUsername()).isPresent())
             return false;
-        CustomerDetails customerDetails = new CustomerDetails(newCustomer.getCustomerDetails().getFirstName(),
-                newCustomer.getCustomerDetails().getLastName(), newCustomer.getCustomerDetails().getPhone());
-        customerDetailsRepository.save(customerDetails);
-        newCustomer.setCustomerDetails(customerDetails);
-        customerRepository.save(newCustomer);
+        Customer customer = new Customer(newCustomerForm.getUsername(), newCustomerForm.getCustomerDetails());
+        customerRepository.save(customer);
         return true;
     }
 
-    public boolean updateCustomer(Customer customer){
-        Customer theCustomer = getCustomer(customer.getUsername());
+    public boolean updateCustomer(CustomerForm customerForm){
+        Customer theCustomer = getCustomer(customerForm.getUsername());
         if(theCustomer != null){
-            theCustomer.getCustomerDetails().setFirstName(customer.getCustomerDetails().getFirstName());
-            theCustomer.getCustomerDetails().setLastName(customer.getCustomerDetails().getLastName());
-            theCustomer.getCustomerDetails().setPhone(customer.getCustomerDetails().getPhone());
+            theCustomer.getCustomerDetails().setFirstName(customerForm.getCustomerDetails().getFirstName());
+            theCustomer.getCustomerDetails().setLastName(customerForm.getCustomerDetails().getLastName());
+            theCustomer.getCustomerDetails().setPhone(customerForm.getCustomerDetails().getPhone());
             return true;
         }
         else

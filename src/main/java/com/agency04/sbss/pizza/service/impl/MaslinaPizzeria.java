@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,12 +22,6 @@ public class MaslinaPizzeria implements PizzeriaService {
     public void doMyPostConstruct(){
         System.out.println("Inside of MaslinaPizzeria's doMyPostConstruct.");
         open = true;
-
-        menu = new ArrayList<>();
-        menu.add(new Capricciosa());
-        menu.add(new QuattroFormaggi());
-        menu.add(new Vegetariana());
-        menu.add(new Americana());
     }
 
     @Override
@@ -43,7 +36,7 @@ public class MaslinaPizzeria implements PizzeriaService {
 
     @Override
     public String makePizza(Pizza pizza) {
-        PizzaIngredient[] ingredients = pizza.getIngredients();
+        PizzaIngredient[] ingredients = pizza.getPizzaIngredients();
         StringBuilder sb = new StringBuilder();
         sb.append("--> Pizzeria " + getName() + " started preparing " + pizza.getName() + ", required ingredients: ");
         for(var i: ingredients)

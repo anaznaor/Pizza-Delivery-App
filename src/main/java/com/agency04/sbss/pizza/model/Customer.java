@@ -1,108 +1,67 @@
 package com.agency04.sbss.pizza.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
+@Entity
+@JsonIgnoreProperties(value = { "deliveries" })
 public class Customer {
-    private String userName;
-    private String name;
-    private String lastName;
-    private int age;
-    private String country;
-    private String city;
-    private String address;
+    @Id
+    @Column(name = "username")
+    private String username;
 
-    public Customer(String userName, String name, String lastName, int age, String country, String city, String address) {
-        this.userName = userName;
-        this.name = name;
-        this.lastName = lastName;
-        this.age = age;
-        this.country = country;
-        this.city = city;
-        this.address = address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_details_id")
+    private CustomerDetails customerDetails;
+
+    @OneToMany(mappedBy = "customer")
+    List<Delivery> deliveries;
+
+    public Customer(String username, CustomerDetails customerDetails) {
+        this.username = username;
+        this.customerDetails = customerDetails;
     }
 
     public Customer() {
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getLastName() {
-        return lastName;
+    public CustomerDetails getCustomerDetails() {
+        return customerDetails;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setCustomerDetails(CustomerDetails customerDetails) {
+        this.customerDetails = customerDetails;
     }
 
-    public int getAge() {
-        return age;
+    public List<Delivery> getDeliveries() {
+        return deliveries;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDeliveries(List<Delivery> deliveries) {
+        this.deliveries = deliveries;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Customer)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return this.getUserName().equals(customer.getUserName());
+        return this.getUsername().equals(customer.getUsername());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName, name, lastName, age, country, city, address);
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "userName='" + userName + '\'' +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                ", country='" + country + '\'' +
-                ", city='" + city + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+        return Objects.hash(username, customerDetails, deliveries);
     }
 }

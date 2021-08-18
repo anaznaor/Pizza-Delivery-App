@@ -1,7 +1,6 @@
 package com.agency04.sbss.pizza.form;
 
 import com.agency04.sbss.pizza.model.PizzaOrder;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +9,11 @@ public class DeliveryOrderForm {
     private List<PizzaOrder> orders = new ArrayList<>();
 
     public DeliveryOrderForm() {
+    }
+
+    public DeliveryOrderForm(String customer, List<PizzaOrder> orders) {
+        this.customer = customer;
+        this.orders = orders;
     }
 
     public String getCustomer() {

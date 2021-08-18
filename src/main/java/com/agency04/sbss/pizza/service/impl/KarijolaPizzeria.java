@@ -23,10 +23,6 @@ public class KarijolaPizzeria implements PizzeriaService {
         open = true;
 
         menu = new ArrayList<>();
-        menu.add(new FruttiDiMare());
-        menu.add(new Margherita());
-        menu.add(new Prosciutto());
-        menu.add(new Tonno());
     }
 
     @Override
@@ -41,7 +37,7 @@ public class KarijolaPizzeria implements PizzeriaService {
 
     @Override
     public String makePizza(Pizza pizza) {
-        PizzaIngredient[] ingredients = pizza.getIngredients();
+        PizzaIngredient[] ingredients = pizza.getPizzaIngredients();
         StringBuilder sb = new StringBuilder();
         sb.append("--> Pizzeria " + getName() + " started preparing " + pizza.getName() + ", required ingredients: ");
         for(var i: ingredients)

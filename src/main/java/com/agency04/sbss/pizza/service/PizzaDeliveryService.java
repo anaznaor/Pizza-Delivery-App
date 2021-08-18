@@ -1,5 +1,9 @@
 package com.agency04.sbss.pizza.service;
 
+import com.agency04.sbss.pizza.form.DeliveryOrderForm;
+import com.agency04.sbss.pizza.repository.DeliveryRepository;
+import com.agency04.sbss.pizza.repository.PizzaOrderRepository;
+import com.agency04.sbss.pizza.repository.PizzaRepository;
 import com.agency04.sbss.pizza.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,18 +17,19 @@ public class PizzaDeliveryService {
     private PizzeriaService pizzeriaService;
     private boolean available;
     private List<PizzaOrder> pizzaOrders = new ArrayList<>();
+    @Autowired
+    private DeliveryRepository deliveryRepository;
+    @Autowired
+    private PizzaOrderRepository pizzaOrderRepository;
+    @Autowired
+    private PizzaRepository pizzaRepository;
+    @Autowired
+    private CustomerService customerService;
 
     @PostConstruct
     public void doMyPostConstruct(){
         System.out.println("Inside of PizzaDelivery's doMyPostConstruct.");
         available = true;
-
-        this.pizzaOrders.add(new PizzaOrder("Margharita", PizzaSize.SMALL, 2));
-        this.pizzaOrders.add(new PizzaOrder("Capriciosa", PizzaSize.LARGE, 1));
-        this.pizzaOrders.add(new PizzaOrder("Vegetariana", PizzaSize.MEDIUM, 3));
-    }
-    public void orderPizza(Pizza pizza) {
-        System.out.println("Order: " + pizza.getName() + " in pizzeria " + pizzeriaService.getName());
     }
 
     public PizzeriaService getPizzeriaService() {
@@ -37,6 +42,38 @@ public class PizzaDeliveryService {
     }
 
     public List<PizzaOrder> getPizzaOrders() {
-        return pizzaOrders;
+        return pizzaOrderRepository.findAll();
+    }
+
+    public boolean saveNewDelivery(DeliveryOrderForm deliveryOrderForm){
+        Customer customer = customerService.getCustomer(deliveryOrderForm.getCustomer());
+        Delivery delivery = new Delivery(customer, deliveryOrderForm.getOrders());
+        deliveryRepository.save(delivery);
+        return saveNewPizzaOrders(deliveryOrderForm.getOrders());
+    }
+
+    public boolean saveNewPizzaOrders(List<PizzaOrder> pizzaOrders){
+        for(var order : pizzaOrders){
+            Pizza pizza = getPizza(order.getPizza().getName());
+            if(pizza != null) {
+                pizzaOrderRepository.save(order);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Pizza getPizza(String name){
+        Optional<Pizza> result = pizzaRepository.findById(name);
+        Pizza pizza = null;
+        if (result.isPresent()) {
+            pizza = result.get();
+        }
+        return pizza;
+    }
+
+    public void saveNewPizza(String name, PizzaIngredient[] pizzaIngredients){
+        Pizza pizza = new Pizza(name, pizzaIngredients);
+        pizzaRepository.save(pizza);
     }
 }
